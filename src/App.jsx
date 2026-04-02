@@ -565,7 +565,9 @@ export default function App() {
                     気が向いたら、こちらをのぞいてみてください。
                   </p>
                   <a
-                    href="#"
+                    href="https://rinne-end.com/session/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       display: "block", textAlign: "center",
                       padding: "14px", border: `1px solid ${goldColor}`,
@@ -587,7 +589,9 @@ export default function App() {
                     ピンときた方だけ、見てみてください。
                   </p>
                   <a
-                    href="#"
+                    href="https://bramble-mars-b81.notion.site/20a28717069680e29264db45ccf18956?pvs=143"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       display: "block", textAlign: "center",
                       padding: "14px", border: `1px solid ${goldColor}`,
