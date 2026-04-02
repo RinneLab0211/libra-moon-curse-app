@@ -182,21 +182,15 @@ async function generatePersonalMessage(freeText, curseName) {
     setTimeout(() => reject(new Error("timeout")), 15000)
   );
 
-  const fetchPromise = fetch("https://api.anthropic.com/v1/messages", {
+  const fetchPromise = fetch("/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 300,
-      system: `あなたはスピリチュアルカウンセラーです。天秤座満月の夜に、ユーザーが人間関係の診断を受けました。ユーザーの呪いのタイプは「${curseName}」です。ユーザーが書いた本音の一言を受け取り、その人だけへの短いメッセージを日本語で書いてください。200字以内。売り込みなし。詩的で静かで深い言葉。説教や助言はしない。ただ受け取って返すだけ。`,
-      messages: [{ role: "user", content: `ユーザーの本音：「${freeText}」` }],
-    }),
+    body: JSON.stringify({ freeText, curseName }),
   }).then(async (res) => {
     if (!res.ok) throw new Error(`API error: ${res.status}`);
     const data = await res.json();
-    const text = data?.content?.find(b => b.type === "text")?.text;
-    if (!text) throw new Error("no text");
-    return text;
+    if (!data.message) throw new Error("no message");
+    return data.message;
   });
 
   try {
