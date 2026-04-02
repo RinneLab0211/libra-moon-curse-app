@@ -120,10 +120,40 @@ const CURSE_TYPES = {
     body: "その疲れは心だけではなく、体にも刻まれています。常に張り詰めた肩、浅い呼吸——それは戦い続けてきた体の記憶です。",
     route: "session",
   },
+  "self_sacrifice+freeze": {
+    name: "与えながら固まる呪い",
+    psych: "あなたは与え続けながら、心の深いところで動けなくなっています。NOと言えないまま、体だけが先に限界を知らせてくる。",
+    body: "誰かに責められたとき、体が固まる感覚があります。それはかつて「動かないことで嵐をやりすごした」体の知恵です。",
+    route: "session",
+  },
+  "self_sacrifice+shutdown": {
+    name: "消えながら与え続ける呪い",
+    psych: "あなたは自分を消しながら、誰かに与え続けてきました。自分の感覚がわからなくなるまで、他者のために動いてきた。",
+    body: "体の感覚が薄くなっています。それは長年、自分より他者を優先し続けてきた体が、自分を守るために感覚を閉じた結果です。",
+    route: "session",
+  },
   "abandonment+sympathetic": {
     name: "近づくほど怖くなる呪い",
     psych: "誰かが近くにいるとき、あなたの中にはいつも「いつか離れていく」という予感があります。だから先に距離を置く。だから本当のことを言えない。これは予知能力ではなく、過去の経験があなたの中に刻んだ防衛反応です。",
     body: "体はそれを正直に表現しています。誰かといるときの緊張、一人になったときにやっと息ができる感覚——これはあなたの体が、まだその頃を生きているサインです。",
+    route: "session",
+  },
+  "abandonment+freeze": {
+    name: "離れることも近づくこともできない呪い",
+    psych: "離れたら怖い。でも近づいたらもっと怖い。その板挟みの中で、あなたは長い間動けずにいます。",
+    body: "体が固まる感覚、喉が詰まる感覚——これは「どちらを選んでも傷つく」という状況を何度も経験してきた体の反応です。",
+    route: "session",
+  },
+  "abandonment+shutdown": {
+    name: "感じないことで生き延びた呪い",
+    psych: "誰かを失うことへの恐れが深すぎて、感じることをやめることで自分を守ってきました。",
+    body: "安心が何かわからない——その感覚は、体が「期待すると傷つく」ということを学んだ結果かもしれません。",
+    route: "spiritual",
+  },
+  "mistrust+sympathetic": {
+    name: "信じたいのに信じられない呪い",
+    psych: "かつて、信じた人に傷つけられた経験があります。だから今、頭では信じたくても体が先に警戒してしまう。",
+    body: "誰かといるとき、肩や胸に緊張が走ります。それは体が「また傷つくかもしれない」と先回りして守っているサインです。",
     route: "session",
   },
   "mistrust+freeze": {
@@ -132,10 +162,34 @@ const CURSE_TYPES = {
     body: "体が固まる感覚、言葉が出てこない感覚——これは体が今も「危険」を感じているサインです。頭ではわかっていても、体が先に反応してしまう。その理由があります。",
     route: "session",
   },
+  "mistrust+shutdown": {
+    name: "すべてを遮断して守る呪い",
+    psych: "信じることへの恐れが、感情そのものを遮断させてきました。傷つかないように、感じないように。",
+    body: "体の感覚が薄い、安心がわからない——これはエネルギー的な影響が絡んでいることもあります。",
+    route: "spiritual",
+  },
+  "submission+sympathetic": {
+    name: "反論できない体になった呪い",
+    psych: "あなたは誰かの意見や感情に合わせることを、長い年月をかけて覚えてきました。自分の意見を言うことへの恐れが、今も体に残っています。",
+    body: "誰かに責められたとき、心臓が跳ね上がる感覚があります。それは「反論すると危険だ」と体が学んだ記憶です。",
+    route: "session",
+  },
+  "submission+freeze": {
+    name: "逆らえない体になった呪い",
+    psych: "あなたは「NOと言う」という選択肢が、実感としてない状態になっています。それは選んだのではなく、そうするしかなかった時期があったから。",
+    body: "体が固まる感覚、喉が詰まる感覚——これは服従することが「生存戦略」だった時期の体の記憶です。",
+    route: "session",
+  },
   "submission+shutdown": {
     name: "自分を消すことを覚えた呪い",
     psych: "あなたはいつの頃からか、自分の気持ちや意見を後回しにすることを覚えました。それは衝突を避けるため、誰かを守るため、あるいは自分が安全でいるため。自分を消すことが、あなたの生存戦略になっていた。",
     body: "体の感覚が薄い、何もしたくなくなる——これはシャットダウンの状態です。体が感じることをやめることで、あなたを守ってきたのです。",
+    route: "session",
+  },
+  "deprivation+sympathetic": {
+    name: "愛を求めて走り続ける呪い",
+    psych: "愛されたい、必要とされたい——その渇望が、あなたをずっと走らせてきました。でも与えられても、どこか満たされない感覚が続きます。",
+    body: "常に緊張している体、一人になったとき落ち着かない感覚——それは愛を受け取るための回路がまだ開き切っていないサインかもしれません。",
     route: "session",
   },
   "deprivation+shutdown": {
@@ -167,14 +221,31 @@ function determineCurseType(answers) {
   const topSchema = Object.entries(schemaCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "self_sacrifice";
   const topBody = Object.entries(bodyCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "sympathetic";
 
-  const key = `${topSchema}+${topBody}`;
-  const curse = CURSE_TYPES[key] || CURSE_TYPES["self_sacrifice+sympathetic"];
-
+  // 霊障ルートの優先判定
   if (spiritualFlag && (topBody === "shutdown" || topBody === "freeze")) {
     return { ...CURSE_TYPES["deprivation+shutdown"], spiritualFlag: true };
   }
 
-  return { ...curse, spiritualFlag };
+  // 完全一致を試みる
+  const exactKey = `${topSchema}+${topBody}`;
+  if (CURSE_TYPES[exactKey]) {
+    return { ...CURSE_TYPES[exactKey], spiritualFlag };
+  }
+
+  // スキーマのみで一致するものを探す
+  const schemaMatch = Object.keys(CURSE_TYPES).find(k => k.startsWith(topSchema + "+"));
+  if (schemaMatch) {
+    return { ...CURSE_TYPES[schemaMatch], spiritualFlag };
+  }
+
+  // ボディのみで一致するものを探す
+  const bodyMatch = Object.keys(CURSE_TYPES).find(k => k.endsWith("+" + topBody));
+  if (bodyMatch) {
+    return { ...CURSE_TYPES[bodyMatch], spiritualFlag };
+  }
+
+  // フォールバック
+  return { ...CURSE_TYPES["self_sacrifice+sympathetic"], spiritualFlag };
 }
 
 async function generatePersonalMessage(freeText, curseName) {
